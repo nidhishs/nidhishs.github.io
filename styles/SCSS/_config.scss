@@ -1,0 +1,355 @@
+/*
+@format
+*/
+
+//Table of Contents:
+//  1. Layout variables
+//  2. Colours
+//  3. Transitions
+//  4. Fonts
+//  5. Mixins/Utility Functions
+
+/******************************************
+*           1. Layout Settings            *
+******************************************/
+//Remove default styling:
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+html {
+    font-size: 62.5%;
+}
+//Layout variables:
+$bezelLarge: 55px;
+$bezelSmall: 40px;
+$bezelMin: 25px;
+
+//Set z-indices:
+$z-indices: (
+    "land": (
+        "hello": 2,
+        "blob": 2,
+        "base": 1,
+        "cover": 0,
+    ),
+    "menu": (
+        "overlay": 9,
+        "pane": 11,
+        "btn": 12,
+    ),
+    "bezels": 10,
+    "toPortrait": 15,
+);
+
+//Set media query breakpoints:
+$mq-breakpts: (
+    mobile: 576px,
+    tablet: 768px,
+    desktop: 992px,
+    large-desktop: 1200px,
+    wide: 1366px,
+    ultrawide: 1536px,
+);
+
+/***************************************
+*              2. Colours              *
+***************************************/
+$blushPink: #fea3a0;
+$royalBlue: #151e59;
+$culturedWhite: #f8f8f8;
+$smokyBlack: #191516;
+$crayolaYellow: #fbaf2a;
+$viridianGreen: #00a0a0;
+
+/***************************************
+*          3. Font Properties          *
+***************************************/
+$font-weights: (
+    "Thin": 100,
+    "Ultralight": 200,
+    "Light": 300,
+    "Regular": 400,
+    "Medium": 500,
+    "Semibold": 600,
+    "Bold": 700,
+    "Extrabold": 800,
+    "Black": 900,
+);
+
+@mixin font-face($name, $weight: "Regular", $style: "") {
+    @font-face {
+        font-family: quote($name);
+        // The path ../assets/fonts/ is relative to main.min.css
+        $path: "../assets/fonts/#{$name}-#{$weight}#{$style}.woff2";
+        src: url($path) format("woff2");
+        font-weight: map-get($font-weights, $weight);
+        @if $style!= "" {
+            font-style: $style;
+        }
+    }
+}
+@include font-face("Gilroy", "Black");
+@include font-face("Gilroy", "Extrabold");
+@include font-face("Gilroy", "Bold");
+@include font-face("Gilroy", "Medium");
+@include font-face("Montserrat", "Black");
+@include font-face("Montserrat", "Extrabold");
+@include font-face("Montserrat", "Bold");
+@include font-face("Montserrat", "Medium");
+@include font-face("Baskerville", "Regular");
+
+/***************************************
+*            4. Transitions            *
+***************************************/
+//Bezier Curves:
+$ease1: cubic-bezier(0.7, 0, 0.3, 1);
+$ease2: cubic-bezier(0.56, 0, 0.265, 1);
+$ease3: cubic-bezier(1, 0, 0, 1);
+
+/***************************************
+*       5. Mixins & UtilityFuncs       *
+***************************************/
+//Set dimensions of elements:
+@mixin setSize($width, $height: $width, $unit: px) {
+    @if unitless($width) or unitless($height) {
+        $width: getUnit($width, $unit);
+        $height: getUnit($height, $unit);
+    }
+    width: $width;
+    height: $height;
+}
+
+//Return z-index values based on z-index map:
+@function z($name, $layer: false) {
+    @if map-has-key($z-indices, $name) {
+        $index: map-get($z-indices, $name);
+        @if $layer {
+            @if map-has-key($index, $layer) {
+                $index: map-get($index, $layer);
+            } @else {
+                @warn 'The layer "#{$layer}" is not defined defined within "#{$name}"';
+            }
+        }
+        @return $index;
+    } @else {
+        @warn "The value "#{$name}" not defined within Z-index map";
+    }
+}
+
+//Media Queries:
+@function get-mq-breakpts($name, $breakpoints: $mq-breakpts) {
+    @if map-has-key($breakpoints, $name) {
+        @return map-get($breakpoints, $name);
+    } @else {
+        @warn "Breakpoint #{$name} not defined.";
+    }
+}
+@mixin media(
+    $from: false,
+    $until: false,
+    $to: false,
+    $and: false,
+    $media-type: all,
+    $breakpoints: $mq-breakpts,
+    $unit: px
+) {
+    $min-width: 0;
+    $max-width: 0;
+    $query: "";
+
+    //FROM: this breakpoint (inclusive)
+    @if $from {
+        @if type-of($from) == number {
+            @if unitless($from) {
+                $from: getUnit($from, $unit);
+            }
+            $min-width: $from;
+        } @else {
+            $min-width: get-mq-breakpts($from);
+        }
+    }
+
+    @if $until and $to {
+        @warn "Using $until and $to together may cause unexpected behavior. Here, $to will take higher priority.";
+    }
+
+    //UNTIL: this breakpoint (exclusive)
+    @if $until {
+        @if type-of($until) == number {
+            @if unitless($until) {
+                $until: getUnit($until, $unit);
+            }
+            $max-width: $until;
+        } @else {
+            $max-width: get-mq-breakpts($until) - 1px;
+        }
+    }
+
+    //TO: this breakpoint (inclusive)
+    @if $to {
+        @if type-of($to) == number {
+            @if unitless($to) {
+                $to: getUnit($to, $unit);
+            }
+            $max-width: $to;
+        } @else {
+            $max-width: get-mq-breakpts($to);
+        }
+    }
+
+    @if $min-width != 0 {
+        $query: "#{$query} and (min-width: #{$min-width})";
+    }
+    @if $max-width != 0 {
+        $query: "#{$query} and (max-width: #{$max-width})";
+    }
+    @if $and {
+        $query: "#{$query} and (#{$and})";
+    }
+
+    @if ($media-type == "all" and $query != "") {
+        $media-type: "";
+        $query: str-slice(unquote($query), 6);
+    }
+
+    @media #{$media-type + $query} {
+        @content;
+    }
+}
+
+//Toggle Visiblity
+@mixin fadeView($type) {
+    @if $type== "hide" {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 1s, opacity 1s;
+    } @else if $type == "show" {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 1s, opacity 1s;
+    }
+}
+
+//Position element:
+@mixin pos($type: absolute, $args: 0 0 0 0, $trf: 0 0, $unit: "%") {
+    position: $type;
+    $offsets: top right bottom left;
+    @if length($args) == 2 or length($args) == 4 {
+        @if length($args) == 2 {
+            $args: join($args, $args);
+        }
+        @each $offset in $offsets {
+            $offsetVal: nth($args, index($offsets, $offset));
+            #{$offset}: validOffset($offsetVal, $unit);
+        }
+    } @else {
+        @warn "Invalid number of arguments. (Must be either 2 or 4).";
+    }
+    @if trf != 0 0 {
+        $X: nth($trf, 1);
+        $Y: nth($trf, 2);
+        //If neither of X and Y is zero
+        @if type-of($X) == number and type-of($Y) == number {
+            $X: getUnit($X, $unit);
+            $Y: getUnit($Y, $unit);
+            @if ($X * $Y) !=0 {
+                transform: translate($X, $Y);
+            } @else if ($X != 0) {
+                transform: translateX($X);
+            } @else if ($Y != 0) {
+                transform: translateY($Y);
+            }
+        } @else {
+            @warn "Invalid value for $trf";
+        }
+    }
+}
+
+@function validOffset($value, $unit: "%") {
+    @if type-of($value) == number {
+        @if ($value != 0) {
+            @return getUnit($value, $unit);
+        } @else {
+            @return null;
+        }
+    } @else if str-slice($value, 1, 1) == "f" {
+        @return str-slice($value, 2);
+    } @else if index(auto initial inherit, $value) {
+        @return $value;
+    } @else {
+        @warn "Invalid offset value.";
+        @return null;
+    }
+}
+@mixin abs($args: 0 0 0 0, $trf: 0 0, $unit: "%") {
+    @include pos(absolute, $args, $trf, $unit);
+}
+@mixin rel($args: 0 0 0 0, $trf: 0 0, $unit: "%") {
+    @include pos(relative, $args, $trf, $unit);
+}
+@mixin fix($args: 0 0 0 0, $trf: 0 0, $unit: "%") {
+    @include pos(fixed, $args, $trf, $unit);
+}
+
+//endsWith function for strings:
+@function str-endsWith($string, $find) {
+    @return str-length($string) >= str-length($find) AND
+        str-slice($string, (str-length($string) - str-length($find) + 1)) == $find;
+}
+
+//Add unit to unitless number
+@function getUnit($number, $unit) {
+    $std_units: "px" "cm" "mm" "%" "in" "em" "rem" "pt" "vw" "vh" "vmin" "vmax";
+    $std_unit_values: 1px 1cm 1mm 1% 1in 1em 1rem 1pt 1vw 1vh 1vmin 1vmax;
+    @if type-of($number) == number {
+        @if not unitless($number) {
+            @return $number;
+        } @else {
+            $index: index($std_units, $unit);
+            @if $index {
+                @return $number * nth($std_unit_values, $index);
+            } @else {
+                @warn "Unknown unit `#{$unit}`.";
+                @return $number;
+            }
+        }
+    } @else {
+        @warn "Invalid type.";
+        @return $number;
+    }
+}
+
+//Use font
+@mixin font($name, $weight: 400, $size: 1rem, $style: false) {
+    font-family: quote($name);
+    font-weight: $weight;
+    font-size: $size;
+    @if $style {
+        font-style: unquote($style);
+    }
+}
+
+//Transition:
+@mixin transition($prop, $time, $easing: $ease1, $delay: 0s) {
+    $transition: ();
+    @for $i from 1 through length($prop) {
+        @for $j from 0 to (length($prop)) - (length($time)) {
+            $time: join($time, nth($time, -1));
+        }
+        @for $j from 0 to (length($prop)) - (length($easing)) {
+            $easing: join($easing, nth($easing, -1));
+        }
+        @for $j from 0 to (length($prop)) - (length($delay)) {
+            $delay: join($delay, nth($delay, -1));
+        }
+
+        $transition: append(
+            $transition,
+            (nth($prop, $i) nth($time, $i) nth($easing, $i) nth($delay, $i)),
+            $separator: comma
+        );
+    }
+    transition: $transition;
+}

@@ -1,0 +1,98 @@
+/*
+@format
+*/
+
+.land {
+    background-color: $culturedWhite;
+    @include rel();
+    @include setSize(100vw, 100vh);
+    overflow: hidden;
+
+    &__blob {
+        //Hide secondary blob shapes.
+        @for $i from 1 through 5 {
+            #blob-scene-#{$i} {
+                display: none;
+            }
+        }
+
+        #blob__scene {
+            @include media($from: "ultrawide") {
+                @include setSize(600px, 520px);
+            }
+            @include media($from: "wide", $until: "ultrawide") {
+                @include setSize(550px, 440px);
+            }
+            @include media($from: "large-desktop", $until: "wide") {
+                @include setSize(500px, 400px);
+            }
+            @include media($from: "tablet", $until: "large-desktop") {
+                @include setSize(450px, 360px);
+            }
+            @include media($from: "mobile", $until: "tablet") {
+                @include setSize(400px, 320px);
+            }
+            @include media($until: "mobile") {
+                @include setSize(350px, 280px);
+            }
+            @include abs(50 25 0 0, $trf: 50 -50);
+            z-index: 2;
+        }
+    }
+
+    &__hello {
+        @include abs(50 0 0 25);
+        @include transition(transform opacity, 0.9s 0.3s, $ease1, 25ms);
+        z-index: z("land", "hello");
+
+        #hello {
+            @include media($from: "ultrawide") {
+                @include setSize(450px, 360px);
+            }
+            @include media($from: "wide", $until: "ultrawide") {
+                @include setSize(400px, 320px);
+            }
+            @include media($from: "large-desktop", $until: "wide") {
+                @include setSize(350px, 280px);
+            }
+            @include media($from: "tablet", $until: "large-desktop") {
+                @include setSize(300px, 240px);
+            }
+            @include media($from: "mobile", $until: "tablet") {
+                @include setSize(250px, 200px);
+            }
+            @include media($until: "mobile") {
+                @include setSize(200px, 160px);
+            }
+            transform: translate(-50%, -50%);
+            @include transition(height width transform, 0.5s);
+
+            .line {
+                fill: none;
+                stroke: $smokyBlack;
+                stroke-width: 41px;
+                @include transition(stroke, 0.9s);
+            }
+            .dot {
+                fill: $smokyBlack;
+                @include transition(fill, 0.9s);
+            }
+        }
+    }
+
+    &__cover {
+        @include abs(0 f0 0 0);
+        width: 50%;
+        height: 100%;
+        background: $blushPink;
+        overflow: hidden;
+
+        #cover-base {
+            stroke-width: 0.2rem;
+            stroke: darken($blushPink, 5%);
+            height: 100%;
+            @include abs(50 0 0 50, $trf: -50 -50);
+            z-index: z("land", "base");
+        }
+    }
+}
