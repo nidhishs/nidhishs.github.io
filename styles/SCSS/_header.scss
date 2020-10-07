@@ -6,6 +6,9 @@
     @include setSize(60px);
     z-index: z("brand");
 
+    #brand {
+        @include setSize(100%);
+    }
     display: flex;
     place-items: center;
     stroke: none;
