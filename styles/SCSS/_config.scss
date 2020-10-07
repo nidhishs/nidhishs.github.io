@@ -37,8 +37,9 @@ $z-indices: (
     "menu": (
         "overlay": 9,
         "pane": 11,
-        "btn": 12,
+        "btn": 9,
     ),
+    "brand": 9,
     "bezels": 10,
     "toPortrait": 15,
 );
@@ -107,6 +108,28 @@ $font-weights: (
 $ease1: cubic-bezier(0.7, 0, 0.3, 1);
 $ease2: cubic-bezier(0.56, 0, 0.265, 1);
 $ease3: cubic-bezier(1, 0, 0, 1);
+
+@keyframes bounce-dot {
+    40% {
+        transform: translateY(-50%);
+    }
+
+    60% {
+        transform: translateY(10%);
+    }
+
+    75% {
+        transform: translateY(-15%);
+    }
+
+    80% {
+        transform: translateY(7%);
+    }
+
+    90% {
+        transform: translateY(-7%);
+    }
+}
 
 /***************************************
 *       5. Mixins & UtilityFuncs       *

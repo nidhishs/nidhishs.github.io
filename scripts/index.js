@@ -6,7 +6,7 @@ function changeBlob() {
     const min = 0, max = 5;
     let nos = Math.floor(Math.random() * (max - min + 1) + min);
 
-    //Prevent duplicate blobs on success event fires.
+    //Prevent duplicate blobs on successive event fires.
     if (nos == prevBlob) {
         if (0 <= nos && nos < 5) nos++;
         else if (0 < nos && nos <= 5) nos--;
@@ -46,4 +46,27 @@ tl_hello
     .from("#l_2 > *", { duration: 0.6, stagger: 0.4, drawSVG: "0%" }, "-=1")
     .from("#o > *", { duration: 1.2, drawSVG: "0%" }, "-=1.2")
     .from("#dot > *", { duration: 0.6, scale: 0, transformOrigin: "50% 50%" }, "-=0.8");
+
+
+// Bouncing dots for brand name and HELLO text
+const hello_text = document.getElementById('hello');
+const hello_dot = document.querySelector('.hello__dot');
+const brand_text = document.querySelector('.brand__box');
+const brand_dot = document.querySelector('.brand__dot');
+
+['click', 'mouseenter'].forEach(event => {
+    hello_text.addEventListener(event, () => {
+        hello_dot.classList.add('animate');
+    })
+    brand_text.addEventListener(event, () => {
+        brand_dot.classList.add('animate');
+    })
+})
+    
+hello_dot.addEventListener('animationend', () => {
+    hello_dot.classList.remove('animate');
+});
+brand_dot.addEventListener('animationend', () => {
+    brand_dot.classList.remove('animate');
+});
 
