@@ -17,35 +17,49 @@
         }
 
         @include media($from: "mobile") {
-            @include abs(50 25 0 0, $trf: 50 -50);
+            @include abs(50 0 0 75, $trf: -50 -50);
         }
 
         @include media($until: "mobile") {
             @include abs(75 0 0 50, $trf: -50 -50);
         }
 
-        z-index: z("land", "blob");
         @include transition(transform opacity, 0.9s 0.3s, $ease1);
+        z-index: z("land", "blob");
+        display: grid;
+        place-items: center;
+
+        @include media($from: "ultrawide") {
+            @include setSize(600px);
+            perspective: 1800px;
+        }
+        @include media($from: "wide", $until: "ultrawide") {
+            @include setSize(500px);
+            perspective: 1500px;
+        }
+        @include media($from: "large-desktop", $until: "wide") {
+            @include setSize(400px);
+            perspective: 1200px;
+        }
+        @include media($from: "tablet", $until: "large-desktop") {
+            @include setSize(350px);
+            perspective: 1000px;
+        }
+        @include media($from: "mobile", $until: "tablet") {
+            @include setSize(300px);
+            perspective: 900px;
+        }
+        @include media($until: "mobile") {
+            @include setSize(200px);
+        }
 
         #blob__scene {
-            @include media($from: "ultrawide") {
-                @include setSize(600px, 520px);
-            }
-            @include media($from: "wide", $until: "ultrawide") {
-                @include setSize(550px, 440px);
-            }
-            @include media($from: "large-desktop", $until: "wide") {
-                @include setSize(500px, 400px);
-            }
-            @include media($from: "tablet", $until: "large-desktop") {
-                @include setSize(450px, 360px);
-            }
-            @include media($from: "mobile", $until: "tablet") {
-                @include setSize(400px, 320px);
-            }
-            @include media($until: "mobile") {
-                @include setSize(350px, 280px);
-            }
+            @include setSize(80%);
+            transform-style: preserve-3d;
+        }
+
+        #blob0-2 {
+            transition: all 5s $ease1;
         }
     }
 
