@@ -4,8 +4,13 @@
 .brand__box {
     @include fix(50px 0 0 50px, -50 -50);
     @include setSize(60px);
-    z-index: z("brand");
+    @include transition(top left, 0.5s, $ease3);
+    .menu--open & {
+        top: 100px;
+        left: 100px;
+    }
 
+    z-index: z("brand");
     #brand {
         @include setSize(100%);
     }
@@ -22,34 +27,79 @@
     }
 }
 
-.menu {
-    &__btn {
-        @include setSize(50px, 50px);
-        @include fix(50px 50px 0 0, 50 -50);
-        z-index: z("menu", "btn");
-        @include media($until: "mobile") {
-            background: $blushPink;
-            .btn__line {
-                background: $culturedWhite;
-            }
-        }
-        @include media($from: "mobile") {
-            background: $culturedWhite;
-            .btn__line {
-                background-color: $smokyBlack;
-            }
-        }
-        border-radius: 50%;
+.menu__btn {
+    @include setSize(50px, 50px);
+    @include fix(50px 50px 0 0, 50 -50);
+    .menu--open & {
+        top: 100px;
+        right: 100px;
+    }
 
+    // Adjust background colour : PINK on mobile, WHITE on desktops.
+    @include media($until: "mobile") {
+        background: $blushPink;
+        .btn__line {
+            background-color: $culturedWhite;
+        }
+    }
+    @include media($from: "mobile") {
+        background: $culturedWhite;
+        .btn__line {
+            background-color: $smokyBlack;
+        }
+    }
+
+    z-index: z("menu", "btn");
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    @include transition(box-shadow top right, 0.5s 0.5s, $ease1 $ease3);
+
+    .btn__icon {
+        @include setSize(30px);
         display: flex;
         flex-direction: column;
+        align-items: end;
         justify-content: center;
-        align-items: center;
-
         .btn__line {
-            @include setSize(30px, 3px);
-            display: block;
-            margin: 2px;
+            @include setSize(100%, 3px);
+            @include transition(transform width background-color, 0.5s, $ease1);
+            margin: 1.5px 0px;
+            &:nth-child(3) {
+                @include setSize(70%, 3px);
+            }
+        }
+    }
+
+    &:hover .btn__line {
+        &:nth-child(1) {
+            transform: translateY(3px);
+        }
+        &:nth-child(2) {
+            width: 0;
+        }
+        &:nth-child(3) {
+            @include setSize(100%, 3px);
+            transform: translateY(-3px);
+        }
+    }
+
+    .menu--open & {
+        .btn__line {
+            @include media($from: "mobile") {
+                background-color: $blushPink;
+            }
+            &:nth-child(1) {
+                transform: translateY(6px) rotate(45deg);
+            }
+            &:nth-child(2) {
+                width: 0;
+            }
+            &:nth-child(3) {
+                transform: translateY(-6px) rotate(-45deg);
+                width: 100%;
+            }
         }
     }
 }

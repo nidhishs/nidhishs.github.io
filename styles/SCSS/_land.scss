@@ -31,35 +31,22 @@
 
         @include media($from: "ultrawide") {
             @include setSize(600px);
-            perspective: 1800px;
         }
         @include media($from: "wide", $until: "ultrawide") {
             @include setSize(500px);
-            perspective: 1500px;
         }
         @include media($from: "large-desktop", $until: "wide") {
             @include setSize(400px);
-            perspective: 1200px;
         }
         @include media($from: "tablet", $until: "large-desktop") {
             @include setSize(350px);
-            perspective: 1000px;
         }
-        @include media($from: "mobile", $until: "tablet") {
+        @include media($until: "tablet") {
             @include setSize(300px);
-            perspective: 900px;
-        }
-        @include media($until: "mobile") {
-            @include setSize(200px);
         }
 
         #blob__scene {
             @include setSize(80%);
-            transform-style: preserve-3d;
-        }
-
-        #blob0-2 {
-            transition: all 5s $ease1;
         }
     }
 

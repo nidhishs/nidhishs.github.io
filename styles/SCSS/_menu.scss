@@ -1,0 +1,51 @@
+/*
+@format
+*/
+.menu {
+    &__card {
+        &__bg {
+            @include fix(50 0 0 50);
+            @include setSize(0);
+            @include transition(opacity transform display width height, 0.3s 0.3s, $ease4);
+
+            @include media($until: "mobile") {
+                @include setSize(80vw);
+            }
+            @include media($from: "mobile", $until: "tablet") {
+                @include setSize(550px);
+            }
+            @include media($from: "tablet", $until: "desktop") {
+                @include setSize(550px);
+            }
+            @include media($from: "desktop") {
+                @include setSize(600px);
+            }
+
+            z-index: z("menu", "card");
+            pointer-events: none;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.7);
+            fill: $culturedWhite;
+
+            .menu--open & {
+                pointer-events: all;
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+    }
+    &__overlay {
+        @include setSize(100vw, 100vh);
+        @include fix();
+        @include transition(opacity, 0.5s, $ease1);
+        background-color: $smokyBlack;
+        z-index: z("menu", "overlay");
+        pointer-events: none;
+        opacity: 0;
+
+        .menu--open & {
+            opacity: 0.8;
+            pointer-events: all;
+        }
+    }
+}

@@ -36,11 +36,10 @@ $z-indices: (
     ),
     "menu": (
         "overlay": 9,
-        "pane": 11,
-        "btn": 9,
+        "card": 10,
+        "btn": 10,
     ),
-    "brand": 9,
-    "bezels": 10,
+    "brand": 10,
     "toPortrait": 15,
 );
 
@@ -108,6 +107,8 @@ $font-weights: (
 $ease1: cubic-bezier(0.7, 0, 0.3, 1);
 $ease2: cubic-bezier(0.56, 0, 0.265, 1);
 $ease3: cubic-bezier(1, 0, 0, 1);
+$ease4: cubic-bezier(0.69, 0.88, 0.25, 1.24);
+$easeBounce: cubic-bezier(0.2, 1.8, 0.4, 0.8);
 
 @keyframes bounce-dot {
     40% {
@@ -130,7 +131,6 @@ $ease3: cubic-bezier(1, 0, 0, 1);
         transform: translateY(-7%);
     }
 }
-
 /***************************************
 *       5. Mixins & UtilityFuncs       *
 ***************************************/
