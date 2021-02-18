@@ -1,0 +1,212 @@
+/*
+@format
+*/
+@import "config";
+
+// To make the webpage occupy entire viewport
+// Better than height:100vh due to behaviour on mobile browsers.
+html,
+body,
+.pageWrapper {
+    height: 100%;
+    background-color: $pink;
+}
+
+.landingCover {
+    // Occupy top 67.5% of the screen.
+    @include setSize(100%, 67.5%);
+    // All child elements are positioned respective to landingCover.
+    @include rel(f0 0 0 0);
+    background-color: $black;
+    background-image: url("../assets/img/pattern.svg");
+    background-repeat: repeat;
+    // Set background-size to set number of copies in the repeat.
+    background-size: 225px;
+    box-shadow: 0px 7px 10px $blackD-alpha;
+    // Prevent any scrolling.
+    overflow: hidden;
+
+    &__blobs {
+        // Smooth out re-positioning.
+        @include transition(top right bottom left, $ease1, 0.8s);
+        // Set the position of the blob wrapper inside cover.
+        @include media($from: "tablet") {
+            @include abs(50% 5% 0 0, 0 -50%);
+        }
+        @include media($to: "tablet") {
+            @include abs(35% 5% 0 0, 0 -50%);
+        }
+        z-index: ind("land", "blob");
+
+        // Increase area of wrapper that triggers blob-morphing.
+        padding: 25px;
+        // Hide additional blobs which are only needed to morph primary blob.
+        @for $i from 1 through 5 {
+            #blob-scene-#{$i} {
+                display: none;
+            }
+        }
+
+        #blob__scene {
+            // Set the responsise size of blobScene.
+            @include rfs(450px, height, $two-d: true);
+
+            // Center the blobScene within wrapper.
+            vertical-align: middle;
+
+            // Smooth out re-sizing.
+            @include transition(height width, $ease1, 0.8s);
+        }
+    }
+
+    &__hello {
+        display: none;
+        // Smooth out re-positioning.
+        @include transition(top right bottom left, $ease1, 0.8s);
+        // Set the position of the hello wrapper inside cover.
+        @include abs(0 0 f0 5%);
+        z-index: z("land", "hello-hi");
+
+        #hello {
+            // Set the responsive size of HELLO text.
+            @include rfs(350px, height, $two-d: true);
+            // Smooth out resizing
+            @include transition(height width, 0.5s);
+
+            // Center the HELLO within the hello wrapper.
+            vertical-align: middle;
+
+            .hello-alph {
+                fill: none;
+                stroke: $white;
+                stroke-width: 41px;
+            }
+            #hello-dot {
+                fill: $white;
+            }
+        }
+    }
+
+    &__hi {
+        // Smooth out re-positioning.
+        @include transition(top right bottom left, $ease1, 0.8s);
+        // Set the position of the hi wrapper inside cover.
+        @include abs(0 0 f0 5%);
+        z-index: z("land", "hello-hi");
+
+        #hi {
+            // Set the responsive size of hi text.
+            @include rfs(400px, height, $two-d: true);
+            min-height: 225px;
+            // Smooth out resizing
+            @include transition(height width, 0.5s);
+
+            // Center the HI within the hi wrapper.
+            vertical-align: middle;
+
+            .hi-alph {
+                fill: none;
+                stroke: $white;
+                stroke-width: 41px;
+            }
+            #hi-dot,
+            .i-dot {
+                fill: $white;
+            }
+        }
+    }
+}
+
+.landingFooter {
+    // Occupy bottom 32.5% of the screen.
+    @include setSize(100%, 32.5%);
+    @include rel(0 0 f0 0);
+    background-image: url("../assets/img/blob-bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    .wrapper {
+        // Position the wrapper inside footer.
+        @include abs(50% 0 0 50%, -50% -50%);
+        z-index: ind("land", "footer");
+
+        // Set wrapper size.
+        height: 80%;
+
+        // Align footer items vertically.
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        .landingFooter__name {
+            // Set font properties.
+            @include font("Halimun", "Regular", 3.2rem);
+            color: $blackD;
+            white-space: nowrap;
+        }
+        .landingFooter__projectBtn {
+            // Btn styling.
+            @include setSize(180px, 45px);
+            border-radius: 22.5px; // height÷2
+            background: $white;
+            padding: 10px 20px;
+
+            // Position the btnText and arrowHead properly.
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+
+            &__text {
+                // Center the text within anchor tag.
+                display: grid;
+                place-items: center;
+
+                // Set font properties.
+                @include font("Gilroy", "Bold", 1.1rem);
+                color: $blackD;
+            }
+
+            &__arrowhead {
+                // Set arrow head properties.
+                height: 18px;
+                fill: $blackD;
+            }
+        }
+        .landingFooter__socials {
+            // Display the social icons in a row
+            display: flex;
+            flex-flow: row nowrap;
+
+            li a svg {
+                @include rfs(25px, height);
+                @include margin(0 7px);
+
+                @include transition(stroke fill, $ease1, 0.3s);
+            }
+
+            .codepen,
+            .linkedin {
+                fill: $blackD;
+                &:hover,
+                &:active,
+                &:focus {
+                    fill: $white;
+                }
+            }
+
+            .github {
+                fill: none;
+                stroke: $blackD;
+                stroke-width: 2.25px;
+                &:hover,
+                &:active,
+                &:focus {
+                    stroke: $white;
+                }
+            }
+        }
+    }
+}

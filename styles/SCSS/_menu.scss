@@ -2,11 +2,19 @@
 @format
 */
 .menu {
-    &__card {
+    &__container {
+        opacity: 0;
+        @include transition(opacity visibility, 0.3s, $ease4);
+        .menu--open & {
+            opacity: 1;
+        }
         &__bg {
+            @include transition(transform width height, 0.3s, $ease4);
             @include fix(50 0 0 50);
-            @include setSize(0);
-            @include transition(opacity transform display width height, 0.3s 0.3s, $ease4);
+            z-index: z("menu", "container");
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0.7);
+            fill: $culturedWhite;
 
             @include media($until: "mobile") {
                 @include setSize(80vw);
@@ -21,16 +29,73 @@
                 @include setSize(600px);
             }
 
-            z-index: z("menu", "card");
-            pointer-events: none;
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0.7);
-            fill: $culturedWhite;
-
             .menu--open & {
                 pointer-events: all;
                 opacity: 1;
                 transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        &__items {
+            @include fix(50 0 0 50);
+            z-index: z("menu", "items");
+            .nav__item {
+                list-style-type: none;
+                a {
+                    display: inline-block;
+                    vertical-align: middle;
+                    cursor: pointer;
+                    @include font("Gilroy", 900, 3rem);
+                    line-height: 1.1;
+                    color: $smokyBlack;
+                    text-decoration: none;
+                    @include media($until: "tablet") {
+                        font-size: 3.5rem;
+                    }
+                    @include media($from: "tablet", $until: "ultrawide") {
+                        margin-top: 6px;
+                        font-size: 4rem;
+                    }
+                    @include media($from: "ultrawide") {
+                        margin-top: 6px;
+                        font-size: 4.5rem;
+                    }
+                    .clr-dot {
+                        color: $blushPink;
+                        font-style: normal;
+                    }
+                    &:hover .msk {
+                        span:before {
+                            transform: scaleX(1.1);
+                        }
+                    }
+                }
+
+                .menu--open & {
+                    .msk span {
+                        @include rel();
+                        &:before {
+                            content: "";
+                            display: block;
+                            @include abs(35% f0 0 -10%);
+                            //height: font-size/2;
+                            @include media($until: "tablet") {
+                                height: 1.25rem;
+                            }
+                            @include media($from: "tablet", $until: "ultrawide") {
+                                height: 1.55rem;
+                            }
+                            @include media($from: "ultrawide") {
+                                height: 1.9rem;
+                            }
+                            background-color: #30bced;
+                            opacity: 0.6;
+                            z-index: -1;
+                            transform-origin: left;
+                            transform: scaleX(0);
+                            @include transition(transform, 400ms, $ease3);
+                        }
+                    }
+                }
             }
         }
     }

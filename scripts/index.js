@@ -136,3 +136,5 @@ function throttle(callback, interval) {
     setTimeout(() => enableCall = true, interval);
   }
 }
+
+// Load HTML inside <div> https://stackoverflow.com/questions/17636528/how-do-i-load-an-html-page-in-a-div-using-javascript
