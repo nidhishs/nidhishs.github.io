@@ -60,7 +60,9 @@ body,
     }
 
     &__hello {
+        // Hide text by default.
         display: none;
+
         // Smooth out re-positioning.
         @include transition(top right bottom left, $ease1, 0.8s);
         // Set the position of the hello wrapper inside cover.
@@ -88,6 +90,9 @@ body,
     }
 
     &__hi {
+        // Hide text by default.
+        display: none;
+
         // Smooth out re-positioning.
         @include transition(top right bottom left, $ease1, 0.8s);
         // Set the position of the hi wrapper inside cover.
@@ -114,6 +119,13 @@ body,
                 fill: $white;
             }
         }
+    }
+
+    // Hide HELLO or Hi depending on initial client width.
+    // < 480px hide HELLO else hide Hi.
+    &__hello.\.show,
+    &__hi.\.show {
+        display: block;
     }
 }
 
@@ -173,6 +185,11 @@ body,
                 // Set arrow head properties.
                 height: 18px;
                 fill: $blackD;
+                @include transition(transform, $ease1, 0.2s);
+            }
+
+            &:hover .landingFooter__projectBtn__arrowhead {
+                animation: cta-arrow 1.5s infinite;
             }
         }
         .landingFooter__socials {
@@ -184,16 +201,19 @@ body,
                 @include rfs(25px, height);
                 @include margin(0 7px);
 
-                @include transition(stroke fill, $ease1, 0.3s);
+                @include transition(stroke fill, ease-in, 0.2s);
             }
 
             .codepen,
             .linkedin {
                 fill: $blackD;
+                @include transition(transform, ease-in, 0.2s);
+
                 &:hover,
                 &:active,
                 &:focus {
                     fill: $white;
+                    transform: scale(1.15);
                 }
             }
 
@@ -201,10 +221,13 @@ body,
                 fill: none;
                 stroke: $blackD;
                 stroke-width: 2.25px;
+                @include transition(transform, ease-in, 0.2s);
+
                 &:hover,
                 &:active,
                 &:focus {
                     stroke: $white;
+                    transform: scale(1.15);
                 }
             }
         }

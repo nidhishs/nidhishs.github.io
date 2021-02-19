@@ -145,6 +145,12 @@ $easeBounce: cubic-bezier(0.2, 1.8, 0.4, 0.8);
     }
 }
 
+@keyframes cta-arrow {
+    50% {
+        transform: translateX(75%);
+    }
+}
+
 /***************************************
 *      5. Responsive Sizing            *
 ***************************************/
@@ -658,6 +664,28 @@ $rfs-mq-property-height: if($rfs-mode == max-media-query, max-height, min-height
         str-slice($string, (str-length($string) - str-length($find) + 1)) == $find;
 }
 
+//reverse strings:
+@function str-reverse($string) {
+    $reverse-string: "";
+    @for $i from 1 through str-length($string) {
+        $c: str-slice($string, $i, $i);
+        $reverse-string: "#{$c}#{$reverse-string}";
+    }
+    @return $reverse-string;
+}
+
+//split strings on separator:
+@function str-split($string, $separator) {
+    $i: str-index($string, $separator);
+    @if $i != null {
+        @return append(
+            str-slice($string, 1, $i - 1),
+            str-split(str-slice($string, $i + str-length($separator)), $separator)
+        );
+    }
+    @return $string;
+}
+
 //Add unit to unitless number
 @function getUnit($number, $unit) {
     $std_units: "px" "cm" "mm" "%" "in" "em" "rem" "pt" "vw" "vh" "vmin" "vmax";
@@ -704,8 +732,8 @@ $rfs-mq-property-height: if($rfs-mode == max-media-query, max-height, min-height
 }
 
 //Selector for styling on parent hover:
-@mixin onParentHover($focus_active: false) {
-    $rootString: #{&};
+@mixin nthParentHover($n: 1, $focus_active: false) {
+    $rootString: str-reverse(#{&});
     $parentIndex: str-index($rootString, " ");
     $parent: str_slice($rootString, 0, $parentIndex - 1);
     $children: str_slice($rootString, $parentIndex);
