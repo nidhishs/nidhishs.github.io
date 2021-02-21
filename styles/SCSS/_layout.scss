@@ -1,0 +1,174 @@
+/** @format */
+
+@import "config";
+
+// Include necessary fonts.
+@include font-face("Poppins", "Semibold");
+@include font-face("Poppins", "Bold");
+@include font-face("Poppins", "Extrabold");
+@include font-face("OggRoman", "Regular");
+@include font-face("JetBrainsMono", "Bold");
+
+// To make the webpage occupy entire viewport
+// Better than height:100vh due to behaviour on mobile browsers.
+html,
+body,
+.pageWrapper {
+    height: 100%;
+    background-color: $blackD;
+}
+
+.main-content {
+    // Make main-content occupy entire screen.
+    height: 100%;
+    // Add padding.
+    @include padding(50px);
+
+    // Child elements positioned relative to main-content.
+    @include rel();
+    z-index: ind("main-content");
+
+    // Configure page background.
+    background-color: $black;
+    background-image: url("../assets/img/pattern.svg");
+    background-repeat: repeat;
+    // Set background-size to set number of copies in the repeat.
+    background-size: 225px;
+    box-shadow: 0px 10px 10px $blackDD-alpha;
+}
+
+footer {
+    @include setSize(100%, 200px);
+    @include sticky(0 0 f0 f0);
+    z-index: ind("footer");
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    @include rfs(0 50px, padding);
+
+    nav {
+        // Align items inside container.
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .footerMenu {
+            // Set font properties.
+            @include font("Gilroy", "Bold", 1.25rem);
+            color: $white;
+
+            // Margin to separte from social icons
+            margin: 10px;
+        }
+        .footerSocials {
+            // Display the social icons in a row
+            display: flex;
+            flex-flow: row nowrap;
+
+            // Margin to separate from footer-menu.
+            margin: 5px;
+
+            li a svg {
+                @include rfs(25px, height);
+                @include margin(0 7px);
+
+                @include transition(stroke fill, ease-in, 0.2s);
+            }
+
+            .codepen,
+            .linkedin {
+                fill: $white;
+                @include transition(transform, ease-in, 0.2s);
+
+                &:hover,
+                &:active,
+                &:focus {
+                    fill: $pink;
+                    transform: scale(1.15);
+                }
+            }
+
+            .github {
+                fill: none;
+                stroke: $white;
+                stroke-width: 2.25px;
+                @include transition(transform, ease-in, 0.2s);
+
+                &:hover,
+                &:active,
+                &:focus {
+                    stroke: $pink;
+                    transform: scale(1.15);
+                }
+            }
+        }
+    }
+
+    .footerBrand {
+        // Set position of brand logo
+        @include abs(50% 0 0 50%, -50% -50%);
+
+        // Set size.
+        @include setSize(50px, $rfs-w: true, $rfs-h: true);
+
+        // Set stroke colour and width.
+        fill: none;
+        stroke-width: 3px;
+        stroke: $grey;
+
+        // Hide on mobile displays
+        @include transition(visibility opacity, $ease1, 0.5s);
+        @include media($until: mobile) {
+            visbility: hidden;
+            opacity: 0;
+        }
+    }
+
+    .contact {
+        @include rel();
+
+        // Align items inside container.
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        padding: 0 10px;
+        white-space: nowrap;
+
+        &__question {
+            @include font("OggRoman", "Regular", 1.1rem);
+            color: $white;
+        }
+
+        &__action {
+            @include font("Poppins", "Black", 1.6rem);
+            color: $pink;
+        }
+
+        &__underline {
+            @include setSize(53px, 2px);
+            @include transition(transform, $ease2, 0.5s);
+            transform: scaleX(0);
+            background-color: $white;
+            display: block;
+        }
+
+        &:hover .contact__underline {
+            transform: scaleX(1);
+        }
+    }
+
+    .author {
+        // Locate in the center bottom of footer.
+        @include abs(0 0 f0 50%, -50% 0);
+        @include margin-bottom(10px);
+
+        // Set font properties.
+        @include font("JetBrainsMono", "Bold", 0.6rem);
+        color: lighten($grey, 20%);
+        white-space: nowrap;
+    }
+}
