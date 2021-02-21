@@ -1,14 +1,11 @@
-/*
-@format
-*/
+/** @format */
 
 //Table of Contents:
 //  1. Layout Settings
 //  2. Colours
-//  3. Transitions & Animations
-//  4. Fonts
+//  3. Transitions
+//  4. Responsive Font Size
 //  5. Mixins/Utility Functions
-//  6. Responsive Font Size
 
 /******************************************
 *           1. Layout Settings            *
@@ -49,6 +46,11 @@ $z-indices: (
         "items": 10,
         "btn": 10,
     ),
+    "proj": (
+        "container": 2,
+    ),
+    "main-content": 1,
+    "footer": -1,
     "brand": 10,
     "toPortrait": 15,
 );
@@ -68,53 +70,19 @@ $mq-breakpts: (
 ***************************************/
 $pink: #fea3a0;
 $pinkD: #fd8f8b;
+$grey: #343b43;
 $black: #292f36;
 $blackD: #20252b;
+$blackDD: #181818;
 $blackD-alpha: rgba(32, 37, 43, 0.3);
+$blackDD-alpha: rgba(24, 24, 24, 0.3);
 $white: #f8f8f8;
 $fluoroWhite: #fff4e5;
 $blue: #1073ba;
 $turq: #22d2ab;
 
 /***************************************
-*          3. Font Properties          *
-***************************************/
-$font-weights: (
-    "Thin": 100,
-    "Ultralight": 200,
-    "Light": 300,
-    "Regular": 400,
-    "Medium": 500,
-    "Semibold": 600,
-    "Bold": 700,
-    "Extrabold": 800,
-    "Black": 900,
-);
-
-@mixin font-face($name, $weight: "Regular", $style: "") {
-    @font-face {
-        font-family: quote($name);
-        // The path ../assets/fonts/ is relative to *.min.css
-        $path: "../assets/fonts/#{$name}-#{$weight}#{$style}.woff2";
-        src: url($path) format("woff2");
-        font-weight: map-get($font-weights, $weight);
-        @if $style!= "" {
-            font-style: $style;
-        }
-    }
-}
-@include font-face("Gilroy", "Black");
-@include font-face("Gilroy", "Extrabold");
-@include font-face("Gilroy", "Bold");
-@include font-face("Gilroy", "Medium");
-@include font-face("Montserrat", "Black");
-@include font-face("Montserrat", "Extrabold");
-@include font-face("Montserrat", "Bold");
-@include font-face("Montserrat", "Medium");
-@include font-face("Halimun", "Regular");
-
-/***************************************
-*            4. Transitions            *
+*            3. Transitions            *
 ***************************************/
 //Bezier Curves:
 $ease1: cubic-bezier(0.7, 0, 0.3, 1);
@@ -123,36 +91,8 @@ $ease3: cubic-bezier(1, 0, 0, 1);
 $ease4: cubic-bezier(0.69, 0.88, 0.25, 1.24);
 $easeBounce: cubic-bezier(0.2, 1.8, 0.4, 0.8);
 
-@keyframes bounce-dot {
-    40% {
-        transform: translateY(-50%);
-    }
-
-    60% {
-        transform: translateY(10%);
-    }
-
-    75% {
-        transform: translateY(-15%);
-    }
-
-    80% {
-        transform: translateY(7%);
-    }
-
-    90% {
-        transform: translateY(-7%);
-    }
-}
-
-@keyframes cta-arrow {
-    50% {
-        transform: translateX(75%);
-    }
-}
-
 /***************************************
-*      5. Responsive Sizing            *
+*      4. Responsive Sizing            *
 ***************************************/
 
 $rfs-base-value: 1.25rem !default;
@@ -466,8 +406,33 @@ $rfs-mq-property-height: if($rfs-mode == max-media-query, max-height, min-height
 }
 
 /***************************************
-*       6. Mixins & UtilityFuncs       *
+*       5. Mixins & UtilityFuncs       *
 ***************************************/
+//Include font-faces.
+$font-weights: (
+    "Thin": 100,
+    "Ultralight": 200,
+    "Light": 300,
+    "Regular": 400,
+    "Medium": 500,
+    "Semibold": 600,
+    "Bold": 700,
+    "Extrabold": 800,
+    "Black": 900,
+);
+@mixin font-face($name, $weight: "Regular", $style: "") {
+    @font-face {
+        font-family: quote($name);
+        // The path ../assets/fonts/ is relative to *.min.css
+        $path: "../assets/fonts/#{$name}-#{$weight}#{$style}.woff2";
+        src: url($path) format("woff2");
+        font-weight: map-get($font-weights, $weight);
+        @if $style!= "" {
+            font-style: $style;
+        }
+    }
+}
+
 //Set dimensions of elements:
 @mixin setSize($width, $height: $width, $unit: px, $rfs-w: false, $rfs-h: false, $two-d: false) {
     @if unitless($width) or unitless($height) {
@@ -656,6 +621,9 @@ $rfs-mq-property-height: if($rfs-mode == max-media-query, max-height, min-height
 }
 @mixin fix($args: 0 0 0 0, $trf: 0 0, $unit: "%") {
     @include pos(fixed, $args, $trf, $unit);
+}
+@mixin sticky($args: 0 0 0 0, $trf: 0 0, $unit: "%") {
+    @include pos(sticky, $args, $trf, $unit);
 }
 
 //endsWith function for strings:

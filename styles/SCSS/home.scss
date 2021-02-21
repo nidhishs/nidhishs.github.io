@@ -1,6 +1,5 @@
-/*
-@format
-*/
+/** @format */
+
 @import "config";
 
 // To make the webpage occupy entire viewport
@@ -11,6 +10,10 @@ body,
     height: 100%;
     background-color: $pink;
 }
+
+// Include necessary fonts.
+@include font-face("Poppins", "Semibold");
+@include font-face("Halimun", "Regular");
 
 .landingCover {
     // Occupy top 67.5% of the screen.
@@ -61,7 +64,8 @@ body,
 
     &__hello {
         // Hide text by default.
-        display: none;
+        visibility: hidden;
+        opacity: 0;
 
         // Smooth out re-positioning.
         @include transition(top right bottom left, $ease1, 0.8s);
@@ -91,7 +95,8 @@ body,
 
     &__hi {
         // Hide text by default.
-        display: none;
+        visibility: hidden;
+        opacity: 0;
 
         // Smooth out re-positioning.
         @include transition(top right bottom left, $ease1, 0.8s);
@@ -125,7 +130,8 @@ body,
     // < 480px hide HELLO else hide Hi.
     &__hello.\.show,
     &__hi.\.show {
-        display: block;
+        visibility: visible;
+        opacity: 1;
     }
 }
 
@@ -157,6 +163,7 @@ body,
             @include font("Halimun", "Regular", 3.2rem);
             color: $blackD;
             white-space: nowrap;
+            user-select: none;
         }
         .landingFooter__projectBtn {
             // Btn styling.
@@ -172,13 +179,13 @@ body,
             align-items: center;
 
             &__text {
-                // Center the text within anchor tag.
                 display: grid;
                 place-items: center;
 
                 // Set font properties.
-                @include font("Gilroy", "Bold", 1.1rem);
+                @include font("Poppins", "Semibold", 1rem);
                 color: $blackD;
+                user-select: none;
             }
 
             &__arrowhead {
@@ -231,5 +238,34 @@ body,
                 }
             }
         }
+    }
+}
+
+// Animations:
+@keyframes bounce-dot {
+    40% {
+        transform: translateY(-50%);
+    }
+
+    60% {
+        transform: translateY(10%);
+    }
+
+    75% {
+        transform: translateY(-15%);
+    }
+
+    80% {
+        transform: translateY(7%);
+    }
+
+    90% {
+        transform: translateY(-7%);
+    }
+}
+
+@keyframes cta-arrow {
+    50% {
+        transform: translateX(75%);
     }
 }
