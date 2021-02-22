@@ -20,7 +20,7 @@ body,
 
 .main-content {
     // Make main-content occupy entire screen.
-    height: 100%;
+    min-height: 100%;
     // Add padding.
     @include padding(50px);
 
