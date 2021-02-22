@@ -57,7 +57,7 @@ footer {
 
         .footerMenu {
             // Set font properties.
-            @include font("Gilroy", "Bold", 1.25rem);
+            @include font("Poppins", "Bold", 1.25rem);
             color: $white;
 
             // Margin to separte from social icons

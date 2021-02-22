@@ -43,13 +43,21 @@
             border-radius: 10px;
             padding: 10px;
 
-            // Child elements must be position w.r.t item.
-            @include rel();
+            // We use flexbox so that the description can take up
+            // all available vertical space
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
             @include transition(background-color, $ease1, 0.6s);
-            &:hover {
+            &:hover,
+            &.--active {
                 // Change background colour on hover revealing description text.
                 background-color: $blue;
+
+                .grid__item__name {
+                    color: $white;
+                }
 
                 // Animate description reveal.
                 .grid__item__desc {
@@ -59,7 +67,8 @@
                 }
 
                 // Animate link reveal.
-                .grid__item__links {
+                .footer__toSrc,
+                .footer__toDemo {
                     visibility: visible;
                     opacity: 1;
                 }
@@ -67,7 +76,8 @@
 
             &__name {
                 @include font("JetBrainsMono", "Bold", 1.4rem);
-                color: $white;
+                color: $blue;
+                @include transition(color, $ease1, 0.6s);
             }
 
             &__desc {
@@ -76,8 +86,8 @@
                 color: $blackD;
                 @include transition(transform opacity visibility, $ease1, 0.7s 0.6s);
 
-                // Separate from header.
-                margin-top: 5px;
+                // Allow it to take all available space.
+                flex-grow: 1;
 
                 // By default, text is lowered and hidden, which is moved back to position on hover.
                 transform: translateY(10px);
@@ -85,26 +95,24 @@
                 opacity: 0;
             }
 
-            &__links {
-                // Position in bottom left corner.
-                @include abs(0 0 15px 10px);
-                width: 60%;
-
-                // Set font properties.
-                @include font("JetBrainsMono", "Bold", 0.75rem);
-                color: $white;
-
-                // By default are hidden, only revealed on hover.
-                @include transition(opacity visibility, $ease1, 0.6s);
-                opacity: 0;
-                visibility: hidden;
-
+            &__footer {
+                //
                 display: flex;
-                flex-direction: row nowrap;
+                flex-flow: row nowrap;
                 justify-content: space-between;
+                align-items: center;
 
-                .source,
-                .demo {
+                .footer__toSrc,
+                .footer__toDemo {
+                    // Set font properties.
+                    @include font("JetBrainsMono", "Bold", 0.75rem);
+                    color: $white;
+
+                    // By default are hidden, only revealed on hover.
+                    @include transition(opacity visibility, $ease1, 0.6s);
+                    opacity: 0;
+                    visibility: hidden;
+
                     .underline {
                         @include setSize(100%, 2px);
                         @include transition(transform, $ease2, 0.5s);
@@ -117,13 +125,52 @@
                         transform: scaleX(1);
                     }
                 }
+
+                .footer__num {
+                    @include font("JetBrainsMono", "Bold", 2rem);
+                    color: darken($grey, 5%);
+                }
             }
 
-            &__num {
-                @include abs(0 3% 3% 0);
-                @include font("JetBrainsMono", "Bold", 2rem);
-                color: darken($grey, 5%);
-            }
+            // &__links {
+            //     // Position in bottom left corner.
+            //     @include abs(0 0 15px 10px);
+            //     width: 60%;
+
+            //     // Set font properties.
+            //     @include font("JetBrainsMono", "Bold", 0.75rem);
+            //     color: $white;
+
+            //     // By default are hidden, only revealed on hover.
+            //     @include transition(opacity visibility, $ease1, 0.6s);
+            //     opacity: 0;
+            //     visibility: hidden;
+
+            //     display: flex;
+            //     flex-direction: row nowrap;
+            //     justify-content: space-between;
+
+            //     .source,
+            //     .demo {
+            //         .underline {
+            //             @include setSize(100%, 2px);
+            //             @include transition(transform, $ease2, 0.5s);
+            //             transform: scaleX(0);
+            //             background-color: $yellow;
+            //             display: block;
+            //         }
+
+            //         &:hover .underline {
+            //             transform: scaleX(1);
+            //         }
+            //     }
+            // }
+
+            // &__num {
+            //     @include abs(0 3% 3% 0);
+            //     @include font("JetBrainsMono", "Bold", 2rem);
+            //     color: darken($grey, 5%);
+            // }
         }
     }
 }
