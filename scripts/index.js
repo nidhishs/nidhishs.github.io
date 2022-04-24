@@ -16,7 +16,8 @@ const projects = [
 const articles = [
     {
         name: '5 SCSS Mixins to check out!',
-        desc: "I talk about what mixins are, why you should use them, and share 5 of my favourite mixins that I\'ve written."
+        desc: "I talk about what mixins are, why you should use them, and share 5 of my favourite mixins that I\'ve written.",
+        src: "https://dev.to/nidhishs/5-scss-mixins-to-check-out-2bkn"
     }
 ]
 
