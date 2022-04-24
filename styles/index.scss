@@ -52,8 +52,6 @@ html {
 
 .text {
     max-width: map-get($map: $breakpts, $key: "md");
-    text-align: justify;
-    text-justify: inter-word;
 }
 
 .projects_container{
