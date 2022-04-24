@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="index.min.css">
+    <title>Nidhish Shah</title>
+</head>
+<body>
+    <main id="content-wrapper">
+        <h1 class="title">Nidhish Shah</h1>
+        <section class="section" id="about">
+            <p class="text">With the advent of deep learning, my curiosity fueled me to explore different domains, such as Natural Language Processing and Computer Vision. Research provides me an avenue to work with the state of the art methods and constantly challenge myself. So more recently, I have been exploring my research interests in Deep Reinforcement Learning.</p>
+            <div class="socials">
+                <span class="social">
+                    <a href="https://github.com/nidhishs/" target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5807 20.2772 21.0497 21.7437 19.0074C23.2101 16.965 23.9993 14.5143 24 12C24 5.37 18.63 0 12 0Z"/>
+                        </svg>
+                    </a>
+                </span>
+                <span class="social">
+                    <a href="https://www.linkedin.com/in/nidhish-s-shah" target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 21 21">
+                            <path d="M4.7,21H.35V7H4.7ZM2.52,5.07A2.54,2.54,0,1,1,5,2.52,2.53,2.53,0,0,1,2.52,5.07ZM21,21H16.65V14.18c0-1.63,0-3.72-2.26-3.72s-2.61,1.77-2.61,3.6V21H7.43V7H11.6V8.89h.06a4.58,4.58,0,0,1,4.12-2.26c4.41,0,5.22,2.9,5.22,6.67Z" />
+                        </svg>
+                    </a>
+                </span>
+                <span class="social">
+                    <a class="resume" href="./assets/CV_NidhishShah.pdf" target="_blank" rel="noopener noreferrer">
+                        View Resume
+                    </a>
+                </span>
+            </div>
+        </section>
+        <section class="section" id="projects">
+            <h2 class="sub-title">Projects</h2>
+            <div class="projects_container">
+                <div class="card" v-for="project in projects">
+                    <div class="card__image"><img :src="project.image" :alt="project.name" :title="project.name"></div>
+                    <div class="card__content">
+                        <h3 class="card__name">{{ project.name }}</h3>
+                        <p class="card__desc">{{ project.desc }}</p>
+                        <a class="card__link" :href="project.src" target="_blank">
+                            <i><svg viewBox="0 0 14 10" >
+                                <path d="M0 5.00002C0 4.86741 0.0526784 4.74024 0.146447 4.64647C0.240215 4.5527 0.367392 4.50002 0.5 4.50002H12.293L9.146 1.35402C9.05211 1.26013 8.99937 1.1328 8.99937 1.00002C8.99937 0.867245 9.05211 0.739908 9.146 0.646021C9.23989 0.552134 9.36722 0.49939 9.5 0.49939C9.63278 0.49939 9.76011 0.552134 9.854 0.646021L13.854 4.64602C13.9006 4.69247 13.9375 4.74764 13.9627 4.80839C13.9879 4.86913 14.0009 4.93425 14.0009 5.00002C14.0009 5.06579 13.9879 5.13091 13.9627 5.19165C13.9375 5.2524 13.9006 5.30758 13.854 5.35402L9.854 9.35402C9.76011 9.44791 9.63278 9.50065 9.5 9.50065C9.36722 9.50065 9.23989 9.44791 9.146 9.35402C9.05211 9.26013 8.99937 9.1328 8.99937 9.00002C8.99937 8.86725 9.05211 8.73991 9.146 8.64602L12.293 5.50002H0.5C0.367392 5.50002 0.240215 5.44734 0.146447 5.35357C0.0526784 5.25981 0 5.13263 0 5.00002V5.00002Z"/>
+                            </svg></i>                               
+                            <span>View demo</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="articles">
+            <h2 class="sub-title">Articles</h2>
+            <div class="articles_container">
+                <div class="card" v-for="article in articles">
+                    <div class="card__content">
+                        <h3 class="card__name">{{ article.name }}</h3>
+                        <p class="card__desc">{{ article.desc }}</p>
+                        <a class="card__link" :href="article.src" target="_blank">
+                            <i><svg viewBox="0 0 14 10" >
+                                <path d="M0 5.00002C0 4.86741 0.0526784 4.74024 0.146447 4.64647C0.240215 4.5527 0.367392 4.50002 0.5 4.50002H12.293L9.146 1.35402C9.05211 1.26013 8.99937 1.1328 8.99937 1.00002C8.99937 0.867245 9.05211 0.739908 9.146 0.646021C9.23989 0.552134 9.36722 0.49939 9.5 0.49939C9.63278 0.49939 9.76011 0.552134 9.854 0.646021L13.854 4.64602C13.9006 4.69247 13.9375 4.74764 13.9627 4.80839C13.9879 4.86913 14.0009 4.93425 14.0009 5.00002C14.0009 5.06579 13.9879 5.13091 13.9627 5.19165C13.9375 5.2524 13.9006 5.30758 13.854 5.35402L9.854 9.35402C9.76011 9.44791 9.63278 9.50065 9.5 9.50065C9.36722 9.50065 9.23989 9.44791 9.146 9.35402C9.05211 9.26013 8.99937 9.1328 8.99937 9.00002C8.99937 8.86725 9.05211 8.73991 9.146 8.64602L12.293 5.50002H0.5C0.367392 5.50002 0.240215 5.44734 0.146447 5.35357C0.0526784 5.25981 0 5.13263 0 5.00002V5.00002Z"/>
+                            </svg></i>
+                            <span>View article</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    
+</body>
+<script src="https://unpkg.com/vue@3"></script>
+<script src="scripts/index.js"></script>
+</html>

@@ -1,0 +1,62 @@
+/* Variables */
+$breakpts: (
+  xs: 345px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+$blue: #29A6FF;
+$dblue: #0053D6;
+$turq: #BDFBDF;
+$yellow: #FFDB15;
+$white: #FFFFFF;
+
+/* Default Styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body, html {
+    height: 100%;
+}
+
+/* Mixins */
+
+@mixin size($property, $min_size, $max_size, $min_viewport:'xs', $max_viewport:'xxl') {
+    $max_vp: map-get($breakpts, $max_viewport);
+    $min_vp: map-get($breakpts, $key: $min_viewport);
+
+    $factor : ($max_size - $min_size)/($max_vp - $min_vp);
+    $size: calc(#{$factor} * (100vw - #{$min_vp}) + 0.85rem);
+    
+    #{$property}: clamp(#{$min_size}, #{$size}, #{$max_size});
+    /* Safari resize fix */
+    min-height: 0vw;
+}
+
+@mixin position($type, $t, $r, $b, $l) {
+    position: $type;
+    @if $t {top: $t};
+    @if $r {right: $r};
+    @if $b {bottom: $b};
+    @if $l {left: $l};
+}
+
+@mixin absolute($t:false, $r:false, $b:false, $l:false) {
+    @include position(absolute, $t, $r, $b, $l);
+}
+
+@mixin relative($t:false, $r:false, $b:false, $l:false) {
+    @include position(relative, $t, $r, $b, $l);
+}
