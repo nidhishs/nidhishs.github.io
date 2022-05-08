@@ -1,7 +1,7 @@
 const projects = [
     {
-        name: 'AI Shooter',
-        desc: 'A Unity based shooting game where the Blue agent learns to shoot all the red targets using reinforcement learning.',
+        name: 'RL Shooting Environment',
+        desc: 'A Unity based environment where the blue agent is trained to shoot all the red targets using reinforcement learning.',
         image: './assets/images/ai_shooter_project.png',
         src: 'https://github.com/nidhishs'
     },
