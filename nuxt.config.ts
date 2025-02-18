@@ -18,17 +18,16 @@ export default defineNuxtConfig({
     classSuffix: "",
   },
   content: {
-    highlight: {
-      theme: "github-dark",
-      preload: ["python"],
-    },
-    markdown: {
-      rehypePlugins: [
-        [
-          "rehype-external-links",
-          { target: "_blank", rel: "noopener noreferer" },
-        ],
-      ],
+    build: {
+      markdown: {
+        highlight: {
+          theme: {
+            default: "github-light",
+            dark: "github-dark",
+          },
+          langs: ["c", "cpp", "python", "yaml"],
+        },
+      },
     },
   },
 });

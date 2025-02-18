@@ -1,5 +1,7 @@
 <template>
-  <main class="prose dark:prose-invert prose-headings:font-serif">
+  <article
+    class="prose dark:prose-invert prose-headings:font-serif prose-img:rounded-lg prose-img:shadow-md prose-pre:bg-inherit prose-pre:border"
+  >
     <template v-if="page">
       <h1 class="-mb-2">{{ page.title }}</h1>
       <p>{{ page.description }}</p>
@@ -21,7 +23,7 @@
         <Button>Back</Button>
       </NuxtLink>
     </template>
-  </main>
+  </article>
 </template>
 
 <script setup lang="ts">
