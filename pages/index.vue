@@ -35,9 +35,9 @@
             <ArrowTopRightIcon :fontControlled="false" class="!size-2 ml-3" />
           </Button>
         </NuxtLink>
-        <NuxtLink to="/blog">
+        <NuxtLink to="/blogs">
           <Button variant="outline"
-            >Blog<ArrowTopRightIcon
+            >Blogs<ArrowTopRightIcon
               :fontControlled="false"
               class="!size-2 ml-3"
           /></Button>
@@ -58,14 +58,14 @@
       >
         <ContentCard
           v-for="blog in blogs"
-          :key="blog._path"
+          :key="blog.path"
           :title="blog.title || 'Untitled'"
           :description="blog.description || ''"
-          :img="blog.headerImg"
-          :link="{ text: 'Read', href: blog._path || '#' }"
+          :img="blog.image"
+          :link="{ text: 'Read', href: blog.path || '#' }"
         />
       </div>
-      <NuxtLink to="/blog">
+      <NuxtLink to="/blogs">
         <Button variant="outline" class="mt-6"
           >View All Blogs<ArrowTopRightIcon
             :fontControlled="false"
@@ -86,11 +86,11 @@
       >
         <ContentCard
           v-for="publication in publications"
-          :key="publication._path"
+          :key="publication.path"
           :title="publication.title || 'Untitled'"
           :description="publication.description || ''"
-          :img="publication.headerImg"
-          :link="{ text: 'Read', href: publication._path || '#' }"
+          :img="publication.image"
+          :link="{ text: 'Read', href: publication.path || '#' }"
         />
       </div>
       <NuxtLink to="/publications">
@@ -106,18 +106,18 @@
 
 <script setup lang="ts">
 import ArrowTopRightIcon from "@/assets/icons/arrow-top-right.svg";
-const { data: blogs } = await useAsyncData("content-blog", () =>
-  queryContent("blog")
-    .only(["_path", "title", "description", "date", "headerImg"])
-    .sort({ date: -1 })
+const { data: blogs } = await useAsyncData("content-blogs", () =>
+  queryCollection("blog")
+    .select("path", "title", "description", "date", "image")
+    .order("date", "DESC")
     .limit(2)
-    .find(),
+    .all(),
 );
 const { data: publications } = await useAsyncData("content-publications", () =>
-  queryContent("publications")
-    .only(["_path", "title", "description", "date", "headerImg"])
-    .sort({ date: -1 })
-    .limit(5)
-    .find(),
+  queryCollection("publication")
+    .select("path", "title", "description", "date", "image")
+    .order("date", "DESC")
+    .limit(2)
+    .all(),
 );
 </script>

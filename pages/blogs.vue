@@ -25,11 +25,11 @@
       <div class="grid gap-3 grid-cols-1 sm:grid-cols-2 mt-6">
         <ContentCard
           v-for="blog in blogs"
-          :key="blog._path"
+          :key="blog.path"
           :title="blog.title || 'Untitled'"
           :description="blog.description || ''"
-          :img="blog.headerImg"
-          :link="{ text: 'Read', href: blog._path || '#' }"
+          :img="blog.image"
+          :link="{ text: 'Read', href: blog.path || '#' }"
         />
       </div>
     </section>
@@ -37,10 +37,10 @@
 </template>
 
 <script setup lang="ts">
-const { data: blogs } = await useAsyncData("content-blog", () =>
-  queryContent("blog")
-    .only(["_path", "title", "description", "date", "headerImg"])
-    .sort({ date: -1 })
-    .find(),
+const { data: blogs } = await useAsyncData("content-blogs", () =>
+  queryCollection("blog")
+    .select("path", "title", "description", "date", "image")
+    .order("date", "DESC")
+    .all(),
 );
 </script>

@@ -9,12 +9,12 @@
       </p>
       <div class="grid gap-3 grid-cols-1 sm:grid-cols-2 mt-6">
         <ContentCard
-          v-for="blog in blogs"
-          :key="blog._path"
-          :title="blog.title || 'Untitled'"
-          :description="blog.description || ''"
-          :img="blog.headerImg"
-          :link="{ text: 'Read', href: blog._path || '#' }"
+          v-for="publication in publications"
+          :key="publication.path"
+          :title="publication.title || 'Untitled'"
+          :description="publication.description || ''"
+          :img="publication.image"
+          :link="{ text: 'Read', href: publication.path || '#' }"
         />
       </div>
     </section>
@@ -22,10 +22,10 @@
 </template>
 
 <script setup lang="ts">
-const { data: blogs } = await useAsyncData("content-publications", () =>
-  queryContent("publications")
-    .only(["_path", "title", "description", "date", "headerImg"])
-    .sort({ date: -1 })
-    .find(),
+const { data: publications } = await useAsyncData("content-publications", () =>
+  queryCollection("publication")
+    .select("path", "title", "description", "date", "image")
+    .order("date", "DESC")
+    .all(),
 );
 </script>

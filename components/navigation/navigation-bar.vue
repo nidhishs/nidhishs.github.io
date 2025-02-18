@@ -47,7 +47,7 @@
 <script setup lang="ts">
 const links = [
   { name: "Home", href: "/" },
-  { name: "Blog", href: "/blog" },
+  { name: "Blogs", href: "/blogs" },
   { name: "Publications", href: "/publications" },
 ];
 

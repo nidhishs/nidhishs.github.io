@@ -13,9 +13,9 @@ useHead({
     {
       rel: "icon",
       type: "image/svg+xml",
-      href: "/favicon.svg"
-    }
-  ]
+      href: "/favicon.svg",
+    },
+  ],
 });
 import { ConfigProvider } from "radix-vue";
 const useIdFunction = () => useId();

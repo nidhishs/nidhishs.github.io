@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 const footerLinks = [
-  { name: "Blog", path: "/blog" },
+  { name: "Blogs", path: "/blogs" },
   { name: "Publications", path: "/publications" },
 ];
 </script>
