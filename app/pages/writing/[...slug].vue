@@ -2,7 +2,7 @@
   <article v-if="page" class="space-y-8">
     <NuxtLink
       to="/"
-      class="inline-flex items-center gap-1 font-serif italic text-muted-foreground hover:text-foreground transition-colors"
+      class="text-muted-foreground hover:text-foreground inline-flex items-center gap-1 font-serif italic transition-colors"
     >
       <ArrowUpLeft class="size-4" /> Index
     </NuxtLink>
@@ -10,12 +10,12 @@
       <h1 class="text-[1.3em] font-semibold tracking-tight">
         {{ page.title }}
       </h1>
-      <time class="block text-sm text-muted-foreground">
-        {{ formatDate(page.date, "long") }}
+      <time class="text-muted-foreground block text-sm">
+        {{ formatDate(page.date, 'long') }}
       </time>
     </header>
     <div
-      class="prose anchored-headings max-w-none dark:prose-invert prose-a:no-underline prose-h2:text-[1.2em] prose-h3:text-[1.05em] prose-h4:text-[1em]"
+      class="prose anchored-headings dark:prose-invert prose-a:no-underline prose-h2:text-[1.2em] prose-h3:text-[1.05em] prose-h4:text-[1em]"
     >
       <ContentRenderer :value="page" />
     </div>
@@ -23,28 +23,28 @@
 </template>
 
 <script setup lang="ts">
-import { formatDate } from "@/lib/utils";
-import { ArrowUpLeft } from "lucide-vue-next";
+import { formatDate } from '@/lib/utils'
+import { ArrowUpLeft } from 'lucide-vue-next'
 
-const route = useRoute();
+const route = useRoute()
 
-const { data: page } = await useAsyncData("writing-" + route.path, () =>
-  queryCollection("writing").path(route.path).first(),
-);
+const { data: page } = await useAsyncData('writing-' + route.path, () =>
+  queryCollection('writing').path(route.path).first(),
+)
 
 if (!page.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: "Page not found",
+    statusMessage: 'Page not found',
     fatal: true,
-  });
+  })
 }
 </script>
 
 <style scoped>
 /* Show a subtle hash only when hovering linked content headings. */
 :deep(.anchored-headings :is(h1, h2, h3, h4, h5, h6) a::after) {
-  content: " #";
+  content: ' #';
   opacity: 0;
   font-size: 0.8em;
   color: var(--muted-foreground);
