@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
-import { ArrowUpLeft } from 'lucide-vue-next'
 
 const props = defineProps<{
   error: NuxtError
@@ -14,7 +13,7 @@ const title = computed(() =>
 
 <template>
   <NuxtLayout>
-    <section class="py-16">
+    <section class="space-y-5 py-16">
       <div class="space-y-1">
         <p class="text-muted-foreground text-sm">
           {{ statusCode }}
@@ -23,13 +22,7 @@ const title = computed(() =>
           {{ title }}
         </h1>
       </div>
-      <NuxtLink
-        to="/"
-        class="text-muted-foreground hover:text-foreground inline-flex items-center gap-1 pt-2 font-serif italic transition-colors"
-      >
-        <ArrowUpLeft class="size-4" />
-        Index
-      </NuxtLink>
+      <BackLink>Index</BackLink>
     </section>
   </NuxtLayout>
 </template>

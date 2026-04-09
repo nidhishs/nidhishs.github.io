@@ -1,13 +1,8 @@
 <template>
   <article v-if="page" class="space-y-8">
-    <NuxtLink
-      to="/"
-      class="text-muted-foreground hover:text-foreground inline-flex items-center gap-1 font-serif italic transition-colors"
-    >
-      <ArrowUpLeft class="size-4" /> Index
-    </NuxtLink>
+    <BackLink>Index</BackLink>
     <header class="space-y-1">
-      <h1 class="text-[1.3em] font-semibold tracking-tight">
+      <h1 class="text-[1.3em] font-medium tracking-tight">
         {{ page.title }}
       </h1>
       <time class="text-muted-foreground block text-sm">
@@ -24,7 +19,6 @@
 
 <script setup lang="ts">
 import { formatDate } from '@/lib/utils'
-import { ArrowUpLeft } from 'lucide-vue-next'
 
 const route = useRoute()
 
