@@ -10,7 +10,7 @@
       </time>
     </header>
     <div
-      class="prose anchored-headings dark:prose-invert prose-a:no-underline prose-h2:text-[1.2em] prose-h3:text-[1.05em] prose-h4:text-[1em]"
+      class="prose anchored-headings dark:prose-invert prose-h2:text-[1.2em] prose-h3:text-[1.05em] prose-h4:text-[1em] prose-ol:my-3 prose-ul:my-2 prose-li:my-1 prose-img:rounded-md prose-img:shadow-md prose-figcaption:text-center"
     >
       <ContentRenderer :value="page" />
     </div>
@@ -37,6 +37,10 @@ if (!page.value) {
 
 <style scoped>
 /* Show a subtle hash only when hovering linked content headings. */
+:deep(.anchored-headings :is(h1, h2, h3, h4, h5, h6) a) {
+  text-decoration: none;
+}
+
 :deep(.anchored-headings :is(h1, h2, h3, h4, h5, h6) a::after) {
   content: ' #';
   opacity: 0;
