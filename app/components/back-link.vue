@@ -14,7 +14,7 @@ withDefaults(
 <template>
   <NuxtLink
     :to="to"
-    class="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-lg transition-colors"
+    class="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 transition-colors"
   >
     <Undo2 class="relative -top-0.5 size-4" />
     <em><slot /></em>
