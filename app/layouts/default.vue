@@ -5,8 +5,6 @@
         <slot />
       </main>
     </div>
-    <p class="text-muted-foreground border-t p-4 text-center text-xs">
-      Nidhish Shah / &#169; {{ new Date().getFullYear() }} / <em class="">carpe diem</em>
-    </p>
+    <Footer />
   </div>
 </template>

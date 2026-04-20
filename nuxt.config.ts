@@ -1,6 +1,6 @@
 import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
-  modules: ['@nuxt/content', 'shadcn-nuxt'],
+  modules: ['@nuxt/content', 'shadcn-nuxt', '@nuxtjs/color-mode'],
   app: {
     head: {
       title: 'Nidhish Shah',
@@ -29,5 +29,8 @@ export default defineNuxtConfig({
   shadcn: {
     prefix: '',
     componentDir: '@/components/ui',
+  },
+  colorMode: {
+    classSuffix: '',
   },
 })

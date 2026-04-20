@@ -20,6 +20,10 @@
 <script setup lang="ts">
 import { formatDate } from '@/lib/utils'
 
+definePageMeta({
+  validate: (route) => !/\.[a-z0-9]+$/i.test(route.path),
+})
+
 const route = useRoute()
 
 const { data: page } = await useAsyncData('writing-' + route.path, () =>
