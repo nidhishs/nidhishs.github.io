@@ -36,6 +36,6 @@
     "typescript": "^6.0.2"
   },
   "lint-staged": {
-    "*.{vue,ts,js,json,css,md}": "prettier --write"
+    "*.{vue,ts,js,json,css}": "prettier --write"
   }
 }
