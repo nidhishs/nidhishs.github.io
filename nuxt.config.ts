@@ -20,6 +20,13 @@ export default defineNuxtConfig({
       },
     },
   },
+  mdc: {
+    components: {
+      map: {
+        pre: 'ContentProsePre',
+      },
+    },
+  },
   devtools: { enabled: true },
   compatibilityDate: '2024-04-03',
   css: ['~/assets/css/tailwind.css'],
