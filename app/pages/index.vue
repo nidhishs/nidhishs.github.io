@@ -37,13 +37,29 @@
 <script setup lang="ts">
 import { formatDate } from '@/lib/utils'
 
+useSeoMeta({
+  title: 'Nidhish Shah',
+  description:
+    'Machine Learning Engineer & Scientist writing about ML, research, and a few other things.',
+  ogTitle: 'Nidhish Shah',
+  ogDescription:
+    'Machine Learning Engineer & Scientist writing about ML, research, and a few other things.',
+  twitterCard: 'summary_large_image',
+})
+
+defineOgImage('Preview', {
+  title: 'ML Engineer & Scientist',
+  subtitle: '',
+})
+
 const { data: posts } = await useAsyncData('writing-posts', () =>
   queryCollection('writing').order('date', 'DESC').all(),
 )
 
 const postsByYear = computed(() => {
-  const groups: { year: string; posts: (typeof posts.value)[number][] }[] = []
-  for (const post of posts.value ?? []) {
+  const items = posts.value ?? []
+  const groups: { year: string; posts: typeof items }[] = []
+  for (const post of items) {
     const year = post.date.slice(0, 4)
     const last = groups.at(-1)
     if (!last || last.year !== year) groups.push({ year, posts: [post] })

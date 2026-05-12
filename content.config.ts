@@ -11,6 +11,7 @@ export default defineContentConfig({
       source: 'writing/**',
       schema: z.object({
         date: z.string(),
+        description: z.string(),
       }),
     }),
   },

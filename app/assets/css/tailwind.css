@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Figtree:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
-
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @plugin '@tailwindcss/typography';
@@ -7,10 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: 'Figtree', sans-serif;
-  --font-heading: 'Bricolage Grotesque', sans-serif;
-  --font-serif: 'Newsreader', serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Figtree', ui-sans-serif, sans-serif;
+  --font-heading: 'Bricolage Grotesque', ui-sans-serif, sans-serif;
+  --font-serif: 'Newsreader', ui-serif, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

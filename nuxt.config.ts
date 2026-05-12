@@ -1,6 +1,18 @@
 import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
-  modules: ['@nuxt/content', 'shadcn-nuxt', '@nuxtjs/color-mode'],
+  modules: ['@nuxt/fonts', 'nuxt-og-image', '@nuxt/content', 'shadcn-nuxt', '@nuxtjs/color-mode'],
+  site: {
+    url: 'https://nidhish.dev',
+    name: 'Nidhish Shah',
+  },
+  fonts: {
+    families: [
+      { name: 'Bricolage Grotesque', weights: ['200 800'], global: true },
+      { name: 'Figtree', weights: ['300 900'], styles: ['normal', 'italic'], global: true },
+      { name: 'Newsreader', weights: ['200 800'], styles: ['normal', 'italic'], global: true },
+      { name: 'JetBrains Mono', weights: ['100 800'], styles: ['normal', 'italic'], global: true },
+    ],
+  },
   app: {
     head: {
       title: 'Nidhish Shah',

@@ -37,6 +37,21 @@ if (!page.value) {
     fatal: true,
   })
 }
+
+useSeoMeta({
+  title: page.value.title,
+  description: page.value.description,
+  ogTitle: page.value.title,
+  ogDescription: page.value.description,
+  ogType: 'article',
+  articlePublishedTime: page.value.date,
+  twitterCard: 'summary_large_image',
+})
+
+defineOgImage('Preview', {
+  title: page.value.title,
+  subtitle: formatDate(page.value.date, 'long'),
+})
 </script>
 
 <style scoped>
