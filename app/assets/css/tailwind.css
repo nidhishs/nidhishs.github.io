@@ -130,5 +130,6 @@
   :where(em, i) {
     font-family: var(--font-serif);
     font-style: italic;
+    font-size: 1.0625em;
   }
 }

@@ -17,7 +17,7 @@ const { copied, copy, isSupported } = useClipboard({ copiedDuring: 2000 })
 
 <template>
   <div class="group relative">
-    <pre :class="[props.class, 'rounded-md']"><slot /></pre>
+    <pre :class="[props.class, 'rounded-md', 'max-h-125']"><slot /></pre>
     <Button
       v-if="isSupported"
       variant="outline"

@@ -15,7 +15,7 @@ export default defineNuxtConfig({
       markdown: {
         highlight: {
           theme: 'github-dark',
-          langs: ['c', 'cpp', 'python', 'yaml'],
+          langs: ['c', 'cpp', 'js', 'python', 'ts', 'yaml'],
         },
       },
     },
@@ -23,6 +23,7 @@ export default defineNuxtConfig({
   mdc: {
     components: {
       map: {
+        blockquote: 'ContentProseBlockquote',
         pre: 'ContentProsePre',
       },
     },
