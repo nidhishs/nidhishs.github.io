@@ -29,6 +29,14 @@ export default defineNuxtConfig({
           theme: 'github-dark',
           langs: ['c', 'cpp', 'js', 'python', 'ts', 'yaml'],
         },
+        rehypePlugins: {
+          'rehype-external-links': {
+            options: {
+              target: '_blank',
+              rel: 'noopener noreferrer',
+            },
+          },
+        },
       },
     },
   },
