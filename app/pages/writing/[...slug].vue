@@ -10,7 +10,7 @@
       </time>
     </header>
     <div
-      class="prose anchored-headings dark:prose-invert prose-h2:text-[1.2em] prose-h3:text-[1.05em] prose-h4:text-[1em] prose-ol:my-3 prose-ul:my-2 prose-li:my-1 prose-img:rounded-md prose-img:shadow-md prose-img:mx-auto prose-figcaption:text-center"
+      class="prose anchored-headings dark:prose-invert prose-h2:text-[1.2em] prose-h3:text-[1.05em] prose-h4:text-[1em] prose-li:my-1 prose-img:rounded-md prose-img:shadow-md prose-img:mx-auto prose-figcaption:text-center"
     >
       <ContentRenderer :value="page" />
     </div>

@@ -1,7 +1,7 @@
 <template>
   <Collapsible v-model:open="open" class="border-border border-y">
     <CollapsibleTrigger
-      class="flex w-full cursor-pointer items-center justify-between py-4 text-sm"
+      class="flex w-full cursor-pointer items-center justify-between py-4 text-sm font-medium"
     >
       {{ title }}
       <ChevronDown
@@ -9,7 +9,7 @@
         :class="{ 'rotate-180': open }"
       />
     </CollapsibleTrigger>
-    <CollapsibleContent>
+    <CollapsibleContent class="text-muted-foreground text-sm">
       <slot />
     </CollapsibleContent>
   </Collapsible>

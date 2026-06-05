@@ -25,17 +25,21 @@ export default defineNuxtConfig({
   content: {
     build: {
       markdown: {
-        highlight: {
-          theme: 'github-dark',
-          langs: ['c', 'cpp', 'js', 'python', 'ts', 'yaml'],
+        remarkPlugins: {
+          'remark-math': {},
         },
         rehypePlugins: {
+          'rehype-katex': {},
           'rehype-external-links': {
             options: {
               target: '_blank',
               rel: 'noopener noreferrer',
             },
           },
+        },
+        highlight: {
+          theme: 'github-dark',
+          langs: ['c', 'cpp', 'js', 'python', 'ts', 'yaml'],
         },
       },
     },
@@ -50,7 +54,7 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   compatibilityDate: '2024-04-03',
-  css: ['~/assets/css/tailwind.css'],
+  css: ['~/assets/css/tailwind.css', 'katex/dist/katex.min.css'],
   vite: {
     plugins: [tailwindcss()],
   },

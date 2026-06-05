@@ -16,9 +16,12 @@
     "better-sqlite3": "^12.8.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "katex": "^0.17.0",
     "lucide-vue-next": "^1.0.0",
     "nuxt": "^4.4.2",
+    "rehype-katex": "^7.0.1",
     "reka-ui": "^2.9.7",
+    "remark-math": "^6.0.0",
     "shadcn-nuxt": "^2.5.3",
     "tailwind-merge": "^3.5.0"
   },

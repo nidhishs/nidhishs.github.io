@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @plugin '@tailwindcss/typography';
+@source '../../../content';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -129,5 +130,18 @@
     font-family: var(--font-serif);
     font-style: italic;
     font-size: 1.0625em;
+    line-height: 1;
+  }
+}
+
+@layer utilities {
+  :is(th, td)[align='center'] {
+    text-align: center;
+  }
+  :is(th, td)[align='left'] {
+    text-align: left;
+  }
+  :is(th, td)[align='right'] {
+    text-align: right;
   }
 }
